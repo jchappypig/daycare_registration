@@ -11,9 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140807112744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "waiting_lists", force: true do |t|
+    t.string   "child_name"
+    t.integer  "child_age"
+    t.string   "parent_name"
+    t.string   "email"
+    t.string   "phone"
+    t.text     "address"
+    t.string   "postcode"
+    t.date     "expect_join_time"
+    t.string   "days_per_week"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
