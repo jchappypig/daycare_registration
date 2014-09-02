@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def index
-
+    if params[:search].present?
+      @daycareCentres = DaycareCentre.near(params[:search], 50, :order => :name)
+    else
+      @daycareCentres = DaycareCentre.all
+    end
   end
 end

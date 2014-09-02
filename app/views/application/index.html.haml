@@ -13,12 +13,15 @@
           %form
             .row.collapse
               .large-10.small-8.columns
-                %input{type: "text"}/
+                = text_field_tag :search, params[:search]
               .large-2.small-3.columns
-                %a.postfix.button.expand{href: "#"} Search
+                =button_to('Search', root_path, class: 'postfix button expand')
     .row
       .large-6.columns
-        %img{src: "http://placehold.it/500x500&text=Image"}/
+        - if @daycareCentres.empty?
+          %img{src: "http://placehold.it/500x500&text=Image"}/
+        - else
+          = image_tag "http://maps.google.com/maps/api/staticmap?size=500x500&sensor=false&zoom=16&markers=#{@daycareCentres.first.latitude}%2C#{@daycareCentres.first.longitude}"
         %br/
       .large-6.columns
         %h3.show-for-small
