@@ -88,21 +88,12 @@
 
 :javascript
   handler = Gmaps.build('Google');
+  var locations = #{@daycareCentreLocations.to_json};
+  if(locations.length !== 0) {
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers(locations);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+  }
 
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers([
-      {
-        "lat": 0,
-        "lng": 0,
-        "infowindow": "One"
-      },
-
-      {
-        "lat": "-33.882571",
-        "lng": "151.157642",
-        "infowindow": "Two"
-      }
-    ]);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  });

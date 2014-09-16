@@ -14,5 +14,7 @@ class ApplicationController < ActionController::Base
     else
       @daycareCentres = []
     end
+
+    @daycareCentreLocations = GmapService.daycaresToLocations(@daycareCentres)
   end
 end

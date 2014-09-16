@@ -25,6 +25,13 @@ describe ApplicationController do
         expect(daycares).to include(@daycare_allawah)
       end
 
+      it 'should assign daycare locations' do
+        get :index, search: 'Carlton, NSW'
+
+        locations = assigns(:daycareCentreLocations)
+        expect(locations.count).to be(2)
+      end
+
       it 'should not return any daycare if not found' do
         get :index, search: 'Sydney, NSW'
         expect(assigns(:daycareCentres).empty?).to be(true)
