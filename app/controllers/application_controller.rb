@@ -5,9 +5,9 @@ class ApplicationController < ActionController::Base
 
   def index
     if params[:search].present?
-      @daycareCentres = DaycareCentre.near(params[:search], 50, :order => :name)
+      @daycareCentres = DaycareCentre.near(params[:search], 2, :order => :name).limit(20)
     else
-      @daycareCentres = DaycareCentre.all
+      @daycareCentres = []
     end
   end
 end

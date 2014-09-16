@@ -16,6 +16,10 @@
                 = text_field_tag :search, params[:search]
               .large-2.small-3.columns
                 =button_to('Search', root_path, class: 'postfix button expand')
+
+    - for daycare in @daycareCentres
+      .row
+        = daycare.address
     .row
       .large-6.columns
         - if @daycareCentres.empty?
