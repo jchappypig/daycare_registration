@@ -5,7 +5,12 @@ class ApplicationController < ActionController::Base
 
   def index
     if params[:search].present?
-      @daycareCentres = DaycareCentre.near(params[:search], 2, :order => :name).limit(20)
+      target = params[:search]
+      if (PostcodeService.isPostcode?(target))
+        postcode = target
+        target = [PostcodeService.findStateByPostcode(postcode), postcode].join(',')
+      end
+      @daycareCentres = DaycareCentre.near(target, 2, :order => :name).limit(20)
     else
       @daycareCentres = []
     end
