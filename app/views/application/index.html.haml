@@ -25,7 +25,8 @@
         - if @daycareCentres.empty?
           %img{src: "http://placehold.it/500x500&text=Image"}/
         - else
-          = image_tag "http://maps.google.com/maps/api/staticmap?size=500x500&sensor=false&zoom=16&markers=#{@daycareCentres.first.latitude}%2C#{@daycareCentres.first.longitude}"
+          %div{:style => 'width: 480px;'}
+            #map{:style => 'width: 480px; height: 480px;'}
         %br/
       .large-6.columns
         %h3.show-for-small
@@ -84,3 +85,24 @@
                 %a{href: "#"} Link 3
               %li
                 %a{href: "#"} Link 4
+
+:javascript
+  handler = Gmaps.build('Google');
+
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+      {
+        "lat": 0,
+        "lng": 0,
+        "infowindow": "One"
+      },
+
+      {
+        "lat": "-33.882571",
+        "lng": "151.157642",
+        "infowindow": "Two"
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
