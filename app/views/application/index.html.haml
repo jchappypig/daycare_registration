@@ -10,12 +10,12 @@
     .row
       .large-12.columns
         .radius.panel
-          %form
+          = form_tag(root_path, :method => 'get') do
             .row.collapse
               .large-10.small-8.columns
-                = text_field_tag :search, params[:search]
+                = text_field_tag :search
               .large-2.small-3.columns
-                =button_to('Search', root_path, class: 'postfix button expand')
+                = submit_tag('Search', class: 'postfix button expand')
 
     - for daycare in @daycareCentres
       .row
